@@ -4,7 +4,7 @@ Vue3.2发布时，`<script setup>`语法糖也跟着正式发布了，结合`typ
 
 ## 开发环境搭建
 
-- 推荐使用vite来快速初始化一个Vue3+Typescript项目，它会配置好一些开箱即用的配置
+- 推荐使用`vite`来快速初始化一个Vue3+Typescript项目，它会配置好一些开箱即用的配置
 - 推荐使用vscode，并且安装volar插件辅助开发
 - 推荐自定义一个代码片段，辅助开发
   ```json
@@ -61,49 +61,6 @@ const book1 = reactive<IFoo>({ bar: 'bar' })
 const book2: IFoo = reactive({ bar: 'bar' })
 // 第三种
 const book3 = reactive({ bar: 'bar' }) as IFoo
-</script>
-```
-- 使用`computed`
-- 使用`watch`
-
-```html
-<template>
-    <div>{{ numberRef }}</div>
-</template>
-<script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
-// ref
-const numberRef = ref(0) // ===> Ref<number>
-const stringRef = ref("") // ===> Ref<string>
-interface IFoo {
-    bar: string
-}
-const fooRef = ref<IFoo>() // ===> Ref<IFoo | undefined>
-// reactive
-const fooReactive: IFoo = reactive({
-    bar: ""
-})
-// computed
-const fooComputed = computed(() => {
-    return fooRef.value
-}) // ===> ComputedRef<IFoo | undefined>
-const fooComputedWritable = computed({
-    get: () => {
-        return fooRef.value
-    },
-    set: (value) => {
-        fooRef.value = value
-    }
-}) // ===> WritableComputedRef<IFoo | undefined>
-// watch
-watch(fooRef, () => {
-    console.log(`fooRef变化了`)
-})
-watch(fooRef, () => {
-    console.log(`fooRef变化了`)
-}, {
-    deep: true
-}) // 检查深度嵌套的对象或数组
 </script>
 ```
 ## 使用`computed`
@@ -171,7 +128,6 @@ const stop = watch(fooRef, () => {
     deep: true
 }) // 检查深度嵌套的对象或数组
 stop(); // 停止侦听
-</script>
 </script>
 ```
 ## 使用`nextTick`
